@@ -1,4 +1,4 @@
-print("----- SEJA BEM-VINDO AO SISTEMA DE ESTOQUE 🪚🛠️⚒️ -----")
+print("----- SEJA BEM-VINDO AO SISTEMA DE ESTOQUE 🪚  🛠️  ⚒️  -----")
 def travarmenu():
     input("\nPressione <ENTER> para abrir o menu interativo...")
 
@@ -8,7 +8,7 @@ produto = [
     [283,"Prego 🔩",896,76]
 ]
 
-def adicionar_produtos():
+def colocar_produtos():
     global produto
     id_Produto= (input("Qual o ID do produto?:"))
     nome_Produto= input("Qual o nome do produto?:")
@@ -61,18 +61,36 @@ def atualizar_Produto():
     if linhaProcurada != -1:
         print(f"\nProduto encontrado: {produto[linhaProcurada]}")
         nova_qant = int(input("Qual a nova quantidade do produto?"))
-        produto[linhaProcurada] 
+        produto[linhaProcurada][2] = nova_qant
         print("Quantidade atualizada com sucesso! 🎉")
     else:
         print(" Não foi possível achar o ID desse produto ❌")
     travarmenu()
 
+def remover_Produto():
+
+    IDproduto = int(input("Digite o ID do produto que deseja remover: "))
+
+    linhaProcurada = -1
+
+    for i in range(len(produto)):
+        if(produto[i][0] == IDproduto):
+            linhaProcurada = i
+   
+    if linhaProcurada == -1:
+        print("ID não encontrado!")
+
+    else:
+        print(f"O produto é: {produto[linhaProcurada]}")
+        produto.pop(linhaProcurada)
+        print("Produto removido com sucesso!🎉")
+    travarmenu()
 
 ### CRIANDO O MENU 
-print("\n---- MENU INTERATIVO 🖥️----")
+print("\n---- MENU INTERATIVO 🖥️  ----")
 while True:
     print("Bem vindo ao menu interativo do estoque. Por favor selecione uma opção:")
-    print("\n1- adicionar_Produto | 2 - listar_Produto | 3- buscarID_Produto | 4- atualizar_Produto | 5- sair ")
+    print("\n1- adicionar_Produto | 2 - listar_Produto | 3- buscarID_Produto | 4- atualizar_Produto |  5- remover_Produtos | 6- Sair ")
     opção = input("Escolha:") 
     if (opção == "1"):
         adicionar_produtos()
@@ -82,7 +100,9 @@ while True:
         buscarId_Produto()
     elif (opção == "4"):
          atualizar_Produto()
-    elif(opção == "5"):
+    elif (opção == "5"):
+         remover_Produto()
+    elif(opção == "6"):
         print("Saindo do menu interativo")
         break
 
