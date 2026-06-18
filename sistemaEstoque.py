@@ -1,8 +1,11 @@
 print("----- SEJA BEM-VINDO AO SISTEMA DE ESTOQUE -----")
+def travarmenu():
+    input("\nPressione <ENTER> para abrir o menu interativo...")
+
 produto = [
-    ["GT23","Parafuso",203,56],
-    ["BL67","Porca",421,98],
-    ["FGH83","Prego",896,76]
+    [423,"Parafuso",203,56],
+    [767,"Porca",421,98],
+    [283,"Prego",896,76]
 ]
 
 def adicionar_produtos():
@@ -17,31 +20,52 @@ def adicionar_produtos():
     produto.append(novo_produto)
     print("Produto adicionado com sucesso!")
     
-## DEFINIR FUNÇÕES
+## DEFININDO FUNÇÕES
 
 def adicionar_produtos():
-    novoProduto = input("Qual o nome do novo tripulante?:") # Pergunta quem 
-    produto.append(novoProduto) # Inserir fulano
+    novoProduto = input("Qual o nome do novo produto?:") 
+    produto.append(novoProduto) 
     print("Produto adicionado com sucesso!")
 
 def listar_Produto():
    print("\n ----- MOSTRANDO PRODUTOS DO ESTOQUE -----")
-   print(f"Os produtos presentes no estoque são: {produto}")
+   for linha in produto:
+       print(linha)
 
 def buscarId_Produto():
+    global produto
     id_Produto= int(input("Qual o ID do produto?:"))
     linhaProcurada = -1
-for i in range(len(produto)): #Varre a linha a linha na matriz
-    if(produto[i][0] == buscarId_Produto): ## VERIFICAR SE A POSIÇÃO DO NOME É IGUAL AO NOME PROCURADO 
-        linhaProcurada = i 
-print(f"O produto procurado é: produto {produto[linhaProcurada]}")
+    for i in range(len(produto)): 
+        if(produto[i][0] == id_Produto): 
+            linhaProcurada = i 
+            break
+    if linhaProcurada != -1:
+        print(f"O produto procurado é: {produto[linhaProcurada]}")
+    else:
+        print("O produto com esse ID não foi encontrado, insira um válido!")
 
 def atualizar_Produto():
     global produto
-print("Qual o ID do produto que você quer atualizar?")
+    buscarId_Produto =(input("Qual o ID do produto que você quer atualizar?"))
+    linhaProcurada = -1 
+    for i in range(len(produto)): 
+    
+        if(produto[i][0] == buscarId_Produto): 
+            linhaProcurada = i 
+        
+    if linhaProcurada != -1:
+        print(f"\nProduto encontrado: {produto[linhaProcurada]} (Quantidade atual: {produto[linhaProcurada]})")
+        nova_qant = int(input("Qual a nova quantidade do produto?"))
+        produto[linhaProcurada] = nova_qant
+        print("Quantidade atualizada com sucesso!")
+    else:
+        print(" Não foi possível achar o ID desse produto")
+
+
 
 ### CRIANDO O MENU 
-print("---- MENU INTERATIVO ----")
+print("\n---- MENU INTERATIVO ----")
 while True:
     print("Bem vindo ao menu interativo do estoque. Por favor selecione uma opção:")
     print("\n1- adicionar_Produto | 2 - listar_Produto | 3- buscarID_Produto | 4- atualizar_Produto | 5- sair ")
@@ -58,5 +82,4 @@ while True:
         break
     print("Saindo do menu interativo!")
 
-    
 
